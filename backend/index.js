@@ -1,13 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-// DECOMMENT:
-// var path = require('path');
+
+var path = require('path');
 
 const app = express();
 
 // public directory
-// DECOMMENT:
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 var corsOptions = {
   origin: "*"
@@ -21,12 +20,12 @@ app.use(express.urlencoded({ extended: true }));
 
 const db = require("./models");
 // normal use. Doesn't delete the database data
-// db.sequelize.sync();
+db.sequelize.sync(); // descomentar
 
 // In development, you may need to drop existing tables and re-sync database
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// }); // comentar
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to bicycle application."});
